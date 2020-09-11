@@ -1,0 +1,93 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+<meta charset="gbk">
+<title>首页_沈刚个人博客 - 一个测试人员的个人博客网站</title>
+<meta name="keywords" content="个人博客,沈刚个人博客" />
+<meta name="description" content="沈刚个人博客，做一个积极向上的测试人员。" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'js/comm.js' %}"></script>
+<!--[if lt IE 9]>
+<script src="{% static 'js/modernizr.js' %}"></script>
+<![endif]-->
+<script src="{% static 'js/scrollReveal.js' %}"></script>
+</head>
+<body>
+    <div style="position:absolute;right:20px;top:5px">
+        {% if user.is_authenticated %}
+            <a id="logout" title="退出" href="{% url 'logout' %}">{{ user.username }}</a>
+        {% endif %}
+    </div>
+<embed src="{% static 'music/GEM_bubble.mp3' %}"  width="0" height="0" loop=“-1” autostart="True"></embed>
+<header>
+  <div class="profile">
+    <div class="avatar fl"><img src="{% static 'images/mark.jpg' %}"></div>
+    <div class="guanzhu fl">
+      <ul>
+        <li><img src="{% static 'images/nianling.png' %}"><span>
+          <script language="javascript">
+ function   ages(str)   
+  {   
+        var   r   =   str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
+        if(r==null)return   false;     
+        var   d=   new   Date(r[1],   r[3]-1,   r[4]);     
+        if   (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4])   
+        {   
+              var   Y   =   new   Date().getFullYear();   
+              return("年龄   "+   (Y-r[1])   +"   周岁");   
+        }   
+        return("日期格式错误！");   
+  }   
+  document.write(ages("1986-06-03"));
+  
+</script></span></li>
+        <li><img src="{% static 'images/weizhi.png' %}"><span>中国·四川·成都</span></li>
+        <li><img src="{% static 'images/qq.png' %}"><span>QQ：670349669</span></li>
+        <li><img src="{% static 'images/weixin.png' %}"><span><img src="{% static 'images/wx_ggshen.jpg' %}"></span></li>
+      </ul>
+    </div>
+    <div class="username">Baby的小家</div>
+  </div>
+  <nav>
+    <ul id="starlist">
+      <li><a href="{% url 'index' %}">我的小家</a></li>
+      <li><a href="{% url 'list' %}">我的博文</a></li>
+      <li><a href="{% url 'share' %}">我的相册</a></li>
+      <li><a href="{% url 'infopic' %}">视频</a></li>
+      <li><a href="{% url 'time' %}">微记录</a></li>
+      <li><a href="{% url 'about' %}">关于我</a></li>
+    </ul>
+  </nav>
+</header>
+<article>
+  <div class="picbox">
+    <ul>
+
+{#      展示照片信息#}
+      {% for title, path in title_path %}
+            <li data-scroll-reveal="enter bottom over 1s" >
+                <a href="{% static path %}"><i><img src="{% static path %}"></i>
+                  <p class="picinfo">{{ title }}</p>
+                </a>
+            </li>
+      {% endfor %}
+
+    </ul>
+  </div>
+  <script>
+	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+		(function(){
+			window.scrollReveal = new scrollReveal({reset: true});
+		})();
+	};
+</script> 
+</article>
+<div class="blank"></div>
+<footer>
+  <p>Made by <a href="{% url 'index' %}" target="_blank">沈刚</a> <a href="{% url 'index' %}">蜀ICP备19007191号</a></p>
+</footer><a href="#" class="cd-top">Top</a>
+</body>
+</html>
